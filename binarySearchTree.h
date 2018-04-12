@@ -16,7 +16,7 @@ public:
     BinarySearchTree();
     ~BinarySearchTree();
 	
-	void insert(int data); 
+	void insert(int); 
 	bool searchElement(int);
 	void inOrderTraversal();
 };
@@ -31,24 +31,24 @@ BinarySearchTree::~BinarySearchTree()
     delete this->root;
 }
 
-void BinarySearchTree::insert(int data, Node *&node)
+void BinarySearchTree::insert(int value, Node *&node)
 {
 	if (node == NULL)
-		node = new Node(data);
-	else if (data <= node->data)
-		insert(data, node->leftChild);
-	else if (data > node->data)
-		insert(data, node->rightChild);
+		node = new Node(value);
+	else if (value <= node->getValue())
+		insert(value, node->getLeftChild());
+	else if (value > node->getValue())
+		insert(value, node->getRightChild());
 }
 
-bool BinarySearchTree::searchElement(int data, Node *&node)
+bool BinarySearchTree::searchElement(int value, Node *&node)
 {
     if (node == NULL)
         return false;
-	else if (data < node->data)
-	    return searchElement(data, node->leftChild);
-	else if (data > node->data)
-	    return searchElement(data, node->rightChild);
+	else if (value < node->getValue())
+	    return searchElement(value, node->getLeftChild());
+	else if (value > node->getValue())
+	    return searchElement(value, node->getRightChild());
 	else
 	    return true;
 }
@@ -59,19 +59,19 @@ void BinarySearchTree::inOrderTraversal(Node *&node)
 	{
 	    return;
 	}
-	inOrderTraversal(node->leftChild);
-	std::cout << node->data << " ";
-	inOrderTraversal(node->rightChild);
+	inOrderTraversal(node->getLeftChild());
+	std::cout << node->getValue() << " ";
+	inOrderTraversal(node->getRightChild());
 }
 
-void BinarySearchTree::insert(int data)
+void BinarySearchTree::insert(int value)
 {
-    insert(data, this->root);
+    insert(value, this->root);
 }
 
-bool BinarySearchTree::searchElement(int data)
+bool BinarySearchTree::searchElement(int value)
 {
-	return searchElement(data, this->root);
+	return searchElement(value, this->root);
 }
 
 void BinarySearchTree::inOrderTraversal()
